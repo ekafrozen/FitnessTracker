@@ -5,13 +5,12 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
-import pl.wsb.fitnesstracker.training.internal.ActivityType;
 import pl.wsb.fitnesstracker.user.api.User;
 
 import java.util.Date;
 
 @Entity
-@Table(name = "healthmetrics")
+@Table(name = "Health_Metrics")
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @ToString
@@ -21,32 +20,26 @@ public class Metric {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
-    @JoinColumn(name = "user_id")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
-    @Column(name = "date", nullable = false)
+    @Column(nullable = false)
     private Date date;
 
-//    @Column(name = "end_time", nullable = false)
-//    private Date endTime;
-
-    @Column(name = "weight", nullable = false)
+    @Column(nullable = false)
     private double weight;
 
-    @Column(name = "height")
     private double height;
 
-    @Column(name = "heart_rate")
     private int heartRate;
 
     public Metric(
             final User user,
-            final Date startTime,
-            final Date endTime,
-            final ActivityType activityType,
-            final double distance,
-            final double averageSpeed) {
+            final Date date,
+            final double weight,
+            final double height,
+            final int heartRate) {
         this.user = user;
         this.date = date;
         this.weight = weight;
