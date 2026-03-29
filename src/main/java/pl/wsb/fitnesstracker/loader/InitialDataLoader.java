@@ -32,9 +32,9 @@ import static java.util.Objects.isNull;
 @RequiredArgsConstructor
 class InitialDataLoader {
 
-    private final JpaRepository<User, Long> userRepository;
+    private JpaRepository<User, Long> userRepository;
 
-    private final JpaRepository<Training, Long> trainingRepository;
+    private JpaRepository<Training, Long> trainingRepository;
 
     @EventListener
     @Transactional
@@ -42,13 +42,13 @@ class InitialDataLoader {
     public void loadInitialData(ContextRefreshedEvent event) {
         verifyDependenciesAutowired();
 
-        log.info("Loading initial data to the database");
+       // log.info("Loading initial data to the database");
 
         List<User> sampleUserList = generateSampleUsers();
         List<Training> sampleTrainingList = generateTrainingData(sampleUserList);
 
 
-        log.info("Finished loading initial data");
+        // log.info("Finished loading initial data");
     }
 
     private User generateUser(String name, String lastName, int age) {

@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+// Twój stary, wymagany import:
 import pl.wsb.fitnesstracker.training.internal.ActivityType;
 import pl.wsb.fitnesstracker.user.api.User;
 
@@ -29,8 +30,9 @@ public class Training {
     @Column(nullable = false)
     private Date endTime;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "activity_type_id", nullable = false)
+    // ZMIANA: Zamiast @ManyToOne używamy @Enumerated
+    @Enumerated(EnumType.STRING)
+    @Column(name = "activityType", nullable = false)
     private ActivityType activityType;
 
     private double distance;
