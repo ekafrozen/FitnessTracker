@@ -1,4 +1,4 @@
-package pl.wsb.fitnesstracker;
+package JPA.LAB02;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
