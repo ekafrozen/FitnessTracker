@@ -9,7 +9,7 @@ import pl.wsb.fitnesstracker.training.api.Training; // Upewnij się, że importu
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "workout_sessions")
+@Table(name = "workout_session")
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class WorkoutSession {
