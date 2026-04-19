@@ -1,42 +1,46 @@
 package pl.wsb.fitnesstracker.training.api;
 
+import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-// Twój stary, wymagany import:
+import lombok.ToString;
 import pl.wsb.fitnesstracker.training.internal.ActivityType;
 import pl.wsb.fitnesstracker.user.api.User;
 
 import java.util.Date;
 
 @Entity
-@Table(name = "Trainings")
+@Table(name = "trainings")
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@ToString
 public class Training {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Nullable
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
-    @Column(nullable = false)
+    @Column(name = "start_time", nullable = false)
     private Date startTime;
 
-    @Column(nullable = false)
+    @Column(name = "end_time", nullable = false)
     private Date endTime;
 
-    // ZMIANA: Zamiast @ManyToOne używamy @Enumerated
     @Enumerated(EnumType.STRING)
-    @Column(name = "activityType", nullable = false)
+    @Column(name = "activity_type", nullable = false)
     private ActivityType activityType;
 
+    @Column(nullable = false)
     private double distance;
 
+    @Column(name = "average_speed", nullable = false)
     private double averageSpeed;
 
     public Training(
