@@ -72,6 +72,32 @@ jobs:
           path: target/surefire-reports/
           if-no-files-found: ignore
           retention-days: 7
+  lab04:
+    name: UserApiIntegrationTest
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v5
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v5
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+          cache: maven
+
+      - name: Run LAB04 tests
+        run: mvn -B test -Dtest=UserApiIntegrationTest -DfailIfNoTests=false --file pom.xml
+
+      - name: Publish LAB04 test results
+        if: always()
+        uses: actions/upload-artifact@v5
+        with:
+          name: surefire-lab04
+          path: target/surefire-reports/
+          if-no-files-found: ignore
+          retention-days: 7
+
 
   package:
     name: Package JAR
